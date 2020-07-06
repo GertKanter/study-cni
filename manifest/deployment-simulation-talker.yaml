@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simulation-talker
+  labels:
+    app: simulation-talker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: simulation-talker
+  template:
+    metadata:
+      labels:
+        app: simulation-talker
+    spec:
+      containers:
+        - name: simulation-talker
+          image: rdbox/study-cni:v1.0
+          tty: true
+          args:
+          - roslaunch
+          - --screen
+          - --wait
+          - talker
+          - talk.launch
+          env:
+            - name: ROS_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+            - name: ROS_MASTER_URI
+              value: "http://simulation-roscore:11311"

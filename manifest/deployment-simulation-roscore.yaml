@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simulation-roscore
+  labels:
+    app: simulation-roscore
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: simulation-roscore
+  template:
+    metadata:
+      labels:
+        app: simulation-roscore
+    spec:
+      containers:
+      - name: simulation-roscore
+        image: ros:noetic-ros-core-focal
+        tty: true
+        args:
+        - roscore
+        env:
+          - name: ROS_IP
+            valueFrom:
+              fieldRef:
+                fieldPath: status.podIP
+        ports:
+          - containerPort: 11311
+            protocol: TCP

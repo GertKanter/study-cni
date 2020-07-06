@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simulation-listener
+  labels:
+    app: simulation-listener
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: simulation-listener
+  template:
+    metadata:
+      labels:
+        app: simulation-listener
+    spec:
+      containers:
+        - name: simulation-listener
+          image: rdbox/study-cni:v1.0
+          tty: true
+          args:
+          - roslaunch
+          - --screen
+          - --wait
+          - listener
+          - listen.launch
+          env:
+            - name: ROS_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+            - name: ROS_MASTER_URI
+              value: "http://simulation-roscore:11311"

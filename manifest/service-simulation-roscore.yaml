@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: simulation-roscore
+  labels:
+    app: simulation-roscore
+spec:
+  ports:
+  - port: 11311
+    protocol: TCP
+  selector:
+    app: simulation-roscore
