@@ -29,4 +29,8 @@ $ kubectl logs simulation-listener-6976c99bd4-84729 -f
 ```
 
 
-## 
+## Description
+- English
+   - [Using Kubernetes CNI \(e\.g\. flannel\) to run a ROS robot](https://medium.com/rdbox/using-kubernetes-cni-e-g-flannel-to-run-a-ros-robot-93081d84d4ec)
+- Japanese
+   - [Kubernetes CNI \(flannelなど\) を使ってROSロボットを動かそう \- Qiita](https://qiita.com/fudekun/items/54f7b9e020b3c18fda5f)
